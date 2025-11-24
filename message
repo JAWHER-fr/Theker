@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Déclaration d'amour animée</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            font-family: "Segoe UI", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: white;
+            color: #ff4b8c;
+            font-size: 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ffe6ef;
+        }
+
+        /* ❤️ Style des cœurs flottants */
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 25px;
+            animation: floatUp 4s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px) scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Check your message</h1>
+
+    <p id="message">
+        Depuis que tu es entré(e) dans ma vie, tout est devenu plus doux, 
+        plus beau, plus lumineux. Je t’aime, tout simplement. 💕 twa7echtek barcha.
+    </p>
+
+    <button onclick="afficherMessage()">Voir le message</button>
+</div>
+
+<!-- 🎵 Fichier audio (remplace musique.mp3 par ton fichier) -->
+<audio id="musique" src="musique.mp3"></audio>
+
+<script>
+    function afficherMessage() {
+        // Affiche le message
+        document.getElementById("message").classList.add("visible");
+
+        // Lance la musique
+        const audio = document.getElementById("musique");
+        audio.play();
+
+        // Génère des cœurs animés toutes les 300 ms
+        setInterval(creerCoeur, 300);
+    }
+
+    function creerCoeur() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+
+        // Position horizontale aléatoire
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+
+        document.body.appendChild(heart);
+
+        // Supprime le cœur après l’animation
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+    }
+</script>
+
+</body>
+</html>
